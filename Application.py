@@ -3,8 +3,6 @@ import tkinter
 from tkinter import PhotoImage, font
 from tkinter import messagebox
 
-from matplotlib.pyplot import text
-
 #Information about the customer saved into an array
 clientInfo = [[]]
 
