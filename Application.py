@@ -1,6 +1,4 @@
 # Created by GastDev
-from cgitb import text
-from os import remove
 import tkinter
 from tkinter import messagebox
 
