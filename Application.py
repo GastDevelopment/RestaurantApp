@@ -1,10 +1,11 @@
 # Created by GastDev
+from cgitb import text
+from os import remove
 import tkinter
-from tkinter import PhotoImage, font
 from tkinter import messagebox
 
-#Information about the customer saved into an array
-clientInfo = [[]]
+#Array to hold the order data
+orderData = []
 
 #Setup the window and it's properties
 total = 0.0
@@ -22,12 +23,7 @@ def takeawayFunction():
     t.geometry("900x900")
     t.configure(background="moccasin")
     address = tkinter.Entry(t, fg="Black", bg="white", width=15, font=("Arial", 12))
-    file = open("logs.txt", "w")
-    addy = address.get()
-    file.write("Address: " + addy)
-
-    file.close()
-    address.pack()
+    
     
 #Menu Function
 def orderFunction():
@@ -48,31 +44,107 @@ def orderFunction():
         global total
         total += 9.99 
         bill.configure(text="Total £" + str(round(total, 2)))
+        global orderData
+        orderData.append(9.99)
     def burgerFunc():
+        global total
+        total += 19.99
+        bill.configure(text="Total £" + str(round(total, 2)))
+        global orderData
+        orderData.append(19.99)
+    def pizzaFunc():
         global total
         total += 29.99
         bill.configure(text="Total £" + str(round(total, 2)))
-    def pizzaFunc():
+        global orderData
+        orderData.append(29.99)
+    
+    def friesFunc():
         global total
-        total += 39.99
+        total += 3.99
+        bill.configure(text="Total £" + str(round(total, 2)))
+        global orderData
+        orderData.append(3.99)
+    def guacemoliFunc():
+        global total
+        total += 5.99
+        bill.configure(text="Total £" + str(round(total, 2)))
+        global orderData
+        orderData.append(5.99)
+    def breadFunc():
+        global total
+        total += 6.99
+        bill.configure(text="Total £" + str(round(total, 2)))
+        global orderData
+        orderData.append(6.99)
+    
+    #Function to loop through the list and get the last value, this removes the last item bought
+    def getLastIndex():
+        global orderData
+        length = len(orderData) - 1
+        return length
+    def removeLastItem():
+        global orderData
+        global total
+        total += getLastIndex()
+        orderData.pop(getLastIndex())
+        print(orderData)
         bill.configure(text="Total £" + str(round(total, 2)))
 
-    #Buttons and packing everything in the function
+    #Defining the buttons and labels properties
     pasta = tkinter.Button(m, text="Pasta             £9.99", fg="Black", bg="cyan2", background="moccasin", command=pastaFunc,height=2, width=20,font=("Arial", 15))
-    burger = tkinter.Button(m, text="Burger           £29.99", fg="Black", bg="cyan2", background="moccasin", command=burgerFunc,height=2, width=20,font=("Arial", 15))
-    pizza = tkinter.Button(m, text="Pizza             £39.99", fg="Black", bg="cyan2", background="moccasin", command=pizzaFunc,height=2, width=20,font=("Arial", 15))
+    burger = tkinter.Button(m, text="Burger           £19.99", fg="Black", bg="cyan2", background="moccasin", command=burgerFunc,height=2, width=20,font=("Arial", 15))
+    pizza = tkinter.Button(m, text="Pizza             £29.99", fg="Black", bg="cyan2", background="moccasin", command=pizzaFunc,height=2, width=20,font=("Arial", 15))
+    
+    fries = tkinter.Button(m, text="Fries             £3.99", fg="Black", bg="cyan2", background="moccasin", command=friesFunc,height=2, width=20,font=("Arial", 15))
+    guacemoli = tkinter.Button(m, text="Guacemoli     £5.99", fg="Black", bg="cyan2", background="moccasin", command=guacemoliFunc,height=2, width=20,font=("Arial", 15))
+    bread = tkinter.Button(m, text="Bread             £6.99", fg="Black", bg="cyan2", background="moccasin", command=breadFunc,height=2, width=20,font=("Arial", 15))
+
+    removeItem = tkinter.Button(m, text="Remove last item Purchased", fg="Black", bg="moccasin", command=removeLastItem, height=2, width=20,font=("Arial", 15))
+
     bill = tkinter.Label(m, text=e, fg="black", background="moccasin", font=("Arial", 20))
     item = tkinter.Label(m, text="Main Courses", background="moccasin", font=("Arial", 20))
-    bill.pack()
-    burger.pack()
-    pizza.pack()
-    pasta.pack()
+    item2 = tkinter.Label(m, text="Sides", background="moccasin", font=("Arial", 20))
+    #orderList = tkinter.Label(m, text="Order List", background="moccasin", font=("Arial", 20))
+    #pastaList = tkinter.Label(m, text="Pasta: " + str())
+    #burgerList =
+    #pizzaList =
+    #friesList =
+    #guacemoliList =
+    #breadList =
+
+    #Packing all the buttons and labels
+    item.pack() # Main Courses
+    item2.pack() # Sides
+    bill.pack() # Bill
+    removeItem.pack()
+    #orderList.pack() # Order List
+    burger.pack() # Burger
+    pizza.pack() # Pizza
+    pasta.pack() # Pasta
+    fries.pack() # Fries
+    guacemoli.pack() # Guacemoli
+    bread.pack() # Bread
+
+    #Packing the item lists
+    #pastaList.pack()
+    #burgerList.pack()
+    #pizzaList.pack()
+    #friesList.pack()
+    #guacemoliList.pack()
+    #breadList.pack()
     
     #Positioning the buttons and labels
     item.place(x=22, y=45)
     pasta.place(x=22, y=88)
     burger.place(x=22, y= 155)
     pizza.place(x=22, y=225)
+
+    item2.place(x=22, y=300)
+    fries.place(x=22, y=340)
+    guacemoli.place(x=22, y=410)
+    bread.place(x=22, y=480)
+    removeItem.place(x=320, y=50)
     
 
 #Buttons
