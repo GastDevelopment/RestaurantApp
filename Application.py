@@ -3,7 +3,7 @@ import tkinter
 from tkinter import messagebox
 
 #Array to hold the order data
-orderData = []
+orderData = [[]]
 
 #Setup the window and it's properties
 total = 0.0
@@ -78,16 +78,15 @@ def orderFunction():
     
     #Function to loop through the list and get the last value, this removes the last item bought
     def getLastIndex():
-        global orderData
-        length = len(orderData) - 1
-        return length
+        return orderData[-1]
     def removeLastItem():
-        global orderData
         global total
-        total += getLastIndex()
-        orderData.pop(getLastIndex())
-        print(orderData)
-        bill.configure(text="Total £" + str(round(total, 2)))
+        try:
+            total -= getLastIndex()
+            orderData.remove(getLastIndex())
+            bill.configure(text="Total £" + str(round(total, 2)))
+        except IndexError:
+            print("[ERROR] ---> Caught IndexError. Order list has no values.")
 
     #Defining the buttons and labels properties
     pasta = tkinter.Button(m, text="Pasta             £9.99", fg="Black", bg="cyan2", background="moccasin", command=pastaFunc,height=2, width=20,font=("Arial", 15))
@@ -98,7 +97,8 @@ def orderFunction():
     guacemoli = tkinter.Button(m, text="Guacemoli     £5.99", fg="Black", bg="cyan2", background="moccasin", command=guacemoliFunc,height=2, width=20,font=("Arial", 15))
     bread = tkinter.Button(m, text="Bread             £6.99", fg="Black", bg="cyan2", background="moccasin", command=breadFunc,height=2, width=20,font=("Arial", 15))
 
-    removeItem = tkinter.Button(m, text="Remove last item Purchased", fg="Black", bg="moccasin", command=removeLastItem, height=2, width=20,font=("Arial", 15))
+    removeItem = tkinter.Button(m, text="Remove last item Purchased", fg="Black", bg="moccasin", command=removeLastItem, height=2, width=24,font=("Arial", 15))
+    submitOrder = tkinter.Button(m, text="")
 
     bill = tkinter.Label(m, text=e, fg="black", background="moccasin", font=("Arial", 20))
     item = tkinter.Label(m, text="Main Courses", background="moccasin", font=("Arial", 20))
@@ -142,7 +142,7 @@ def orderFunction():
     fries.place(x=22, y=340)
     guacemoli.place(x=22, y=410)
     bread.place(x=22, y=480)
-    removeItem.place(x=320, y=50)
+    removeItem.place(x=600, y=50)
     
 
 #Buttons
