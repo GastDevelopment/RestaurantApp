@@ -111,6 +111,9 @@ def orderFunction():
         if 6.99 in orderData:
             brCount = orderData.count(6.99)
             file.write(str(brCount) + " Breads ---> Total Bread Price: " + str((round(brCount * 6.99, 2))) + "\n")
+        orderData.clear()
+        total = 0
+        file.close()
 
     #Defining the buttons and labels properties
     pasta = tkinter.Button(m, text="Pasta             £9.99", fg="Black", bg="cyan2", background="moccasin", command=pastaFunc,height=2, width=20,font=("Arial", 15))
