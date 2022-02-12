@@ -87,7 +87,10 @@ def orderFunction():
             bill.configure(text="Total £" + str(round(total, 2)))
         except IndexError:
             print("[ERROR] ---> Caught IndexError. Order list has no values.")
-
+        except TypeError:
+            print("[ERROR] ---> Caught TypeError. Unsupported operator for float and list.")
+    def submitOrderFunc():
+        pass
     #Defining the buttons and labels properties
     pasta = tkinter.Button(m, text="Pasta             £9.99", fg="Black", bg="cyan2", background="moccasin", command=pastaFunc,height=2, width=20,font=("Arial", 15))
     burger = tkinter.Button(m, text="Burger           £19.99", fg="Black", bg="cyan2", background="moccasin", command=burgerFunc,height=2, width=20,font=("Arial", 15))
@@ -97,8 +100,8 @@ def orderFunction():
     guacemoli = tkinter.Button(m, text="Guacemoli     £5.99", fg="Black", bg="cyan2", background="moccasin", command=guacemoliFunc,height=2, width=20,font=("Arial", 15))
     bread = tkinter.Button(m, text="Bread             £6.99", fg="Black", bg="cyan2", background="moccasin", command=breadFunc,height=2, width=20,font=("Arial", 15))
 
-    removeItem = tkinter.Button(m, text="Remove last item Purchased", fg="Black", bg="moccasin", command=removeLastItem, height=2, width=24,font=("Arial", 15))
-    submitOrder = tkinter.Button(m, text="")
+    removeItem = tkinter.Button(m, text="Remove Last Item Purchased", fg="Black", bg="moccasin", command=removeLastItem, height=2, width=24,font=("Arial", 15))
+    submitOrder = tkinter.Button(m, text="Submit Order", fg="Black", bg="moccasin", command=submitOrderFunc, height=2, width=24,font=("Arial", 15))
 
     bill = tkinter.Label(m, text=e, fg="black", background="moccasin", font=("Arial", 20))
     item = tkinter.Label(m, text="Main Courses", background="moccasin", font=("Arial", 20))
