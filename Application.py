@@ -34,6 +34,7 @@ def orderFunction():
     #Close listener
     def on_closing():
         if messagebox.askokcancel("Quit", "Are you sure you want to cancel your order?"):
+            orderData.clear()
             m.destroy()
     m.protocol("WM_DELETE_WINDOW", on_closing)
 
@@ -90,7 +91,27 @@ def orderFunction():
         except TypeError:
             print("[ERROR] ---> Caught TypeError. Unsupported operator for float and list.")
     def submitOrderFunc():
-        pass
+        file = open("orders.txt", 'w')
+        file.write("Order List\n")
+        if 9.99 in orderData:
+            pCount = orderData.count(9.99)
+            file.write(str(pCount) + " Pastas ---> Total Pasta Price: " + str((round(pCount * 9.99, 2))) + "\n")
+        if 19.99 in orderData:
+            bCount = orderData.count(19.99)
+            file.write(str(bCount) + " Burgers ---> Total Burger Price: " + str((round(bCount * 19.99, 2))) + "\n")
+        if 29.99 in orderData:
+            pCount = orderData.count(29.99)
+            file.write(str(pCount) + " Pizzas ---> Total Pizza Price: " + str((round(pCount * 29.99, 2))) + "\n")
+        if 3.99 in orderData:
+            fCount = orderData.count(3.99)
+            file.write(str(fCount) + " Fries ---> Total Fries Price: " + str((round(fCount * 3.99, 2))) + "\n")
+        if 5.99 in orderData:
+            gCount = orderData.count(5.99)
+            file.write(str(gCount) + " Guacemolis ---> Total Guacemoli Price: " + str((round(gCount * 5.99, 2))) + "\n")
+        if 6.99 in orderData:
+            brCount = orderData.count(6.99)
+            file.write(str(brCount) + " Breads ---> Total Bread Price: " + str((round(brCount * 6.99, 2))) + "\n")
+
     #Defining the buttons and labels properties
     pasta = tkinter.Button(m, text="Pasta             £9.99", fg="Black", bg="cyan2", background="moccasin", command=pastaFunc,height=2, width=20,font=("Arial", 15))
     burger = tkinter.Button(m, text="Burger           £19.99", fg="Black", bg="cyan2", background="moccasin", command=burgerFunc,height=2, width=20,font=("Arial", 15))
@@ -106,34 +127,19 @@ def orderFunction():
     bill = tkinter.Label(m, text=e, fg="black", background="moccasin", font=("Arial", 20))
     item = tkinter.Label(m, text="Main Courses", background="moccasin", font=("Arial", 20))
     item2 = tkinter.Label(m, text="Sides", background="moccasin", font=("Arial", 20))
-    #orderList = tkinter.Label(m, text="Order List", background="moccasin", font=("Arial", 20))
-    #pastaList = tkinter.Label(m, text="Pasta: " + str())
-    #burgerList =
-    #pizzaList =
-    #friesList =
-    #guacemoliList =
-    #breadList =
 
     #Packing all the buttons and labels
     item.pack() # Main Courses
     item2.pack() # Sides
     bill.pack() # Bill
     removeItem.pack()
-    #orderList.pack() # Order List
+    submitOrder.pack() # Submit Order
     burger.pack() # Burger
     pizza.pack() # Pizza
     pasta.pack() # Pasta
     fries.pack() # Fries
     guacemoli.pack() # Guacemoli
     bread.pack() # Bread
-
-    #Packing the item lists
-    #pastaList.pack()
-    #burgerList.pack()
-    #pizzaList.pack()
-    #friesList.pack()
-    #guacemoliList.pack()
-    #breadList.pack()
     
     #Positioning the buttons and labels
     item.place(x=22, y=45)
@@ -146,6 +152,7 @@ def orderFunction():
     guacemoli.place(x=22, y=410)
     bread.place(x=22, y=480)
     removeItem.place(x=600, y=50)
+    submitOrder.place(x=600, y=120)
     
 
 #Buttons

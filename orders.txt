@@ -1,0 +1,7 @@
+Order List
+19 Pastas ---> Total Pasta Price: 189.81
+20 Burgers ---> Total Burger Price: 399.8
+18 Pizzas ---> Total Pizza Price: 539.82
+37 Fries ---> Total Fries Price: 147.63
+16 Guacemolis ---> Total Guacemoli Price: 95.84
+21 Breads ---> Total Bread Price: 146.79
