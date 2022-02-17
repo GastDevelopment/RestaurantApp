@@ -1,13 +1,21 @@
 # Created by GastDev
 import tkinter
 from tkinter import messagebox
+import uuid
 
-#Array to hold the order data
+#Array to hold the order data and amounts of items they ordered
 orderData = [[]]
+pastaA = 0
+burgerA = 0
+pizzaA = 0
+friesA = 0
+guacA = 0
+breadA = 0
 
 #Setup the window and it's properties
 total = 0.0
 window = tkinter.Tk()
+window.iconbitmap("image.ico")
 window.title("Gast's Outlet")
 window.geometry("900x900")
 window.configure(background="moccasin")
@@ -45,6 +53,7 @@ def orderFunction():
         bill.configure(text="Total £" + str(round(total, 2)))
         global orderData
         orderData.append(9.99)
+        
     def burgerFunc():
         global total
         total += 19.99
@@ -76,7 +85,7 @@ def orderFunction():
         bill.configure(text="Total £" + str(round(total, 2)))
         global orderData
         orderData.append(6.99)
-    
+#####################################################################################################################################################################################################
     #Function to loop through the list and get the last value, this removes the last item bought
     def getLastIndex():
         return orderData[-1]
@@ -90,6 +99,7 @@ def orderFunction():
             print("[ERROR] ---> Caught IndexError. Order list has no values.")
         except TypeError:
             print("[ERROR] ---> Caught TypeError. Unsupported operator for float and list.")
+#####################################################################################################################################################################################################
     def submitOrderFunc():
         file = open("orders.txt", 'w')
         file.write("Order List\n")
@@ -112,9 +122,15 @@ def orderFunction():
             brCount = orderData.count(6.99)
             file.write(str(brCount) + " Breads ---> Total Bread Price: " + str((round(brCount * 6.99, 2))) + "\n")
         orderData.clear()
-        total = 0
+        ids = []
+        id = uuid.uuid4()
+        ids.append(id)
+        messagebox.showinfo("Success!", "Your order has been successfully recieved!\nYour order ID is " + str(id))
+        ids.clear()
+        m.destroy()
+    
         file.close()
-
+#####################################################################################################################################################################################################
     #Defining the buttons and labels properties
     pasta = tkinter.Button(m, text="Pasta             £9.99", fg="Black", bg="cyan2", background="moccasin", command=pastaFunc,height=2, width=20,font=("Arial", 15))
     burger = tkinter.Button(m, text="Burger           £19.99", fg="Black", bg="cyan2", background="moccasin", command=burgerFunc,height=2, width=20,font=("Arial", 15))
