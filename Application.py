@@ -15,7 +15,6 @@ breadA = 0
 #Setup the window and it's properties
 total = 0.0
 window = tkinter.Tk()
-window.iconbitmap("image.ico")
 window.title("Gast's Outlet")
 window.geometry("900x900")
 window.configure(background="moccasin")
