@@ -22,15 +22,7 @@ window.configure(background="moccasin")
 greetings = tkinter.Label(window, text="Welcome to Gast's Outlet!\nChoose an option!", fg="black",
                           background="moccasin", font=("Arial", 24))
 #Functions
-#Takeaway Function
-def takeawayFunction():
-    t = tkinter.Tk()
-    t.title("Gast's Takeaway")
-    t.geometry("900x900")
-    t.configure(background="moccasin")
-    address = tkinter.Entry(t, fg="Black", bg="white", width=15, font=("Arial", 12))
-    
-    
+#####################################################################################################################################################################################################
 #Menu Function
 def orderFunction():
     m = tkinter.Tk()
@@ -45,7 +37,7 @@ def orderFunction():
             orderData.clear()
             m.destroy()
     m.protocol("WM_DELETE_WINDOW", on_closing)
-
+#####################################################################################################################################################################################################
     #Functions for the buttons
     def pastaFunc():
         global total
@@ -103,6 +95,11 @@ def orderFunction():
     def submitOrderFunc():
         file = open("orders.txt", 'w')
         file.write("Order List\n")
+        ids = []
+        id = uuid.uuid4()
+        ids.append(id)
+        file.write("Order ID: " + str(id) + "\n")
+        ids.clear()
         if 9.99 in orderData:
             pCount = orderData.count(9.99)
             file.write(str(pCount) + " Pastas ---> Total Pasta Price: " + str((round(pCount * 9.99, 2))) + "\n")
@@ -122,13 +119,8 @@ def orderFunction():
             brCount = orderData.count(6.99)
             file.write(str(brCount) + " Breads ---> Total Bread Price: " + str((round(brCount * 6.99, 2))) + "\n")
         orderData.clear()
-        ids = []
-        id = uuid.uuid4()
-        ids.append(id)
         messagebox.showinfo("Success!", "Your order has been successfully recieved!\nYour order ID is " + str(id))
-        ids.clear()
         m.destroy()
-    
         file.close()
 #####################################################################################################################################################################################################
     #Defining the buttons and labels properties
@@ -146,7 +138,7 @@ def orderFunction():
     bill = tkinter.Label(m, text=e, fg="black", background="moccasin", font=("Arial", 20))
     item = tkinter.Label(m, text="Main Courses", background="moccasin", font=("Arial", 20))
     item2 = tkinter.Label(m, text="Sides", background="moccasin", font=("Arial", 20))
-
+#####################################################################################################################################################################################################
     #Packing all the buttons and labels
     item.pack() # Main Courses
     item2.pack() # Sides
@@ -173,14 +165,12 @@ def orderFunction():
     removeItem.place(x=600, y=50)
     submitOrder.place(x=600, y=120)
     
-
+#####################################################################################################################################################################################################
 #Buttons
-takeaway = tkinter.Button(window, font=("Arial", 30), text="Takeaway", fg="Black", bg="cyan2", command=takeawayFunction, height=2, width=8)
 order = tkinter.Button(window,font=("Arial", 30), text="Order", fg="Black", bg="cyan2", command=orderFunction, height=2, width=8)
 
 #Pack everything here
 greetings.pack()
-takeaway.pack()
 order.pack()
 
 
